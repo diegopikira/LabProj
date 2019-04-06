@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+ 	 <head>
+    	<title>Caixa</title>
+		<meta charset="iso-8859-1"/>
+	
+    
+		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+	
+
+		<link href="css/bootstrap.min.css" rel=stylesheet>
+	
+		<script>
+			$(document).ready(function(){
+			
+
+				("#busca").click(function() {
+
+					var numeroComanda = $( "#numeroComanda" ).val();
+					var numeroPedido = $( "#numeroPedido" ).val();
+					var quantidade = $( "#quantidade" ).val();
+					var item = $( "#item" ).val();
+					var preco = $( "#preco" ).val();
+					var obs = $( "#obs" ).val();
+					
+					$("#dadosComanda").empty();
+				
+					var url1 = "/comanda/"+numeroComanda;
+					
+					$.getJSON(url1, function(data) {
+						
+						var itens = [];
+						itens.push("<tr> <td>"+ data.numeroComanda +"</td><td>"+ data.espc.numeroPedido +"</td><td>"+ data.espc.quantidade +"</td><td>"+ data.espc.item +"</td><td>"+ data.espc.preco +"</td><td>"+ data.espc.obs +"</td><td>");						
+
+						$("#dadosComanda").append(itens);	
+						});
+				});
+			});
+		</script>	
+		<script>
+			$(document).ready(function(){
+			
+
+				("#cadastra").click(function() {
+
+					var numeroComanda = $( "#numeroComanda" ).val();
+					var numeroPedido = $( "#numeroPedido" ).val();
+					var quantidade = $( "#quantidade" ).val();
+					var item = $( "#item" ).val();
+					var preco = $( "#preco" ).val();
+					var obs = $( "#obs" ).val();
+					
+					$("#dadosComanda").empty();
+				
+					var url2 = "/comanda/lista/"+numeroComanda;
+					
+					$.getJSON(url2, function(data) {
+						
+						var itens = [];
+						itens.push("<tr> <td>"+ data.numeroComanda +"</td><td>"+ data.espc.numeroPedido +"</td><td>"+ data.espc.quantidade +"</td><td>"+ data.espc.item +"</td><td>"+ data.espc.preco +"</td><td>"+ data.espc.obs +"</td><td>");						
+
+						$("#dadosComanda").append(itens);	
+						});
+				});
+			});
+			</script>
+
+  	</head>
+
+  		<body>
+
+  			<div id="painelBusca">
+  			<div class="form-group.col-sm-6">
+  			</div>
+    		<label for="Comanda">Comanda</label>
+    		<input class="form-control" id="numeroComanda" placeholder="Digite o numero da comanda">
+  			</div>
+  			<div class="form-group.col-sm-6">
+    		<label for="Modelo">Quantidade</label>
+    		<input class="form-control" id="quantidade" placeholder="Digite a quantidade do item">
+  			</div>		
+			<div class="form-group.col-sm-6">
+    		<label for="Modelo">Item</label>
+    		<input class="form-control" id="item" placeholder="Digite o nome do item">
+  			</div>	
+			<div class="form-group.col-sm-6">
+    		<label class="blockquote text-center" for="Modelo">Preço</label>
+    		<input class="form-control" id="preco" placeholder="Digite o preco">
+  			</div>	
+			<div class="form-group.col-sm-6">
+    		<label for="Modelo">Observação</label>
+    		<input class="form-control" id="obs" placeholder="Observacao">
+			</div>		
+			<div class="btn-group.col-sm-4" role="group" aria-label="Exemplo">
+			<button id="busca" class="btn btn-primary col-md-2">Buscar</button>
+			<button id="cadastra" class="btn btn-success col-md-2">Cadastrar</button>
+			<button id="encerra" class="btn btn-danger col-md-2">Encerra</button>
+			</div>
+			<table class="table table-bordered"> 
+			<caption>Caixa</caption>
+				<thead>
+					<tr> 
+						<th>Comanda</th>
+						<th>Pedido</th>
+						<th>Quantidade</th> 
+						<th>Item</th> 
+						<th>Preço</th>
+						<th>Observação</th> 
+					</tr> 
+				</thead> 
+				
+				<tbody id="dadosComanda"> 
+					
+				</tbody> 
+			</table>
+ 		</body>
+  
+</html>
